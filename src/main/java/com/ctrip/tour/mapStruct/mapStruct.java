@@ -20,35 +20,33 @@ import static com.ctrip.tour.dozer.dozer.generateDepartmentBean;
 public class mapStruct {
     public static void main(String[] args) {
         long startTime = System.currentTimeMillis();
-        SourceBean sourceBean = new SourceBean(
-                9,
-                "Ctrip",
-                new ArrayList<String>(Arrays.asList("Vnedor","Ship","Hotel")),
-                generateDepartmentBean()
-        );
-        TargetBean targetBean = BeanMapper.BEAN_MAPPER.convert(sourceBean);
-        System.out.println(targetBean.getHeadCount());
-        System.out.println(targetBean.getCompanyName());
-        System.out.println(targetBean.getDepartmentName());
-        System.out.println(targetBean.getDepartmentHashMap());
+        for (int i=0;i<100000;i++){
+            SourceBean sourceBean = new SourceBean(
+                    9,
+                    "Ctrip",
+                    new ArrayList<String>(Arrays.asList("Vnedor","Ship","Hotel")),
+                    generateDepartmentBean()
+            );
+            TargetBean targetBean = BeanMapper.BEAN_MAPPER.convert(sourceBean);
+        }
 
         long endTime = System.currentTimeMillis();
         System.out.println("costTime : "+ (endTime-startTime));
 
-        System.out.println(BeanMapper.BEAN_MAPPER.priceBigDecimal(Arrays.asList(10)));
-
-        SourceMS sourceMS = new SourceMS(new Timestamp(System.currentTimeMillis()),new Date(0L), Calendar.getInstance());
-
-        TargetMS targetMS = BeanMapper.BEAN_MAPPER.timeConvert(sourceMS);
-
-        System.out.println(targetMS.getTimestamp().getTime());
-
-        System.out.println(targetMS.getCalendar());
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DATE,2);
-
-        System.out.println(calendar.getTime());
+//        System.out.println(BeanMapper.BEAN_MAPPER.priceBigDecimal(Arrays.asList(10)));
+//
+//        SourceMS sourceMS = new SourceMS(new Timestamp(System.currentTimeMillis()),new Date(0L), Calendar.getInstance());
+//
+//        TargetMS targetMS = BeanMapper.BEAN_MAPPER.timeConvert(sourceMS);
+//
+//        System.out.println(targetMS.getTimestamp().getTime());
+//
+//        System.out.println(targetMS.getCalendar());
+//
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.add(Calendar.DATE,2);
+//
+//        System.out.println(calendar.getTime());
 
     }
 }

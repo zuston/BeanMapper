@@ -1,8 +1,11 @@
 package com.ctrip.tour.dozer;
 
 import com.ctrip.tour.MapperObject.*;
+import com.ctrip.tour.MapperObject.SourceBean;
+import com.ctrip.tour.MapperObject.TargetBean;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
+import org.modelmapper.ModelMapper;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,24 +23,38 @@ public class dozer {
     public static void main(String[] args) {
 
         long startTime = System.currentTimeMillis();
+        for (int i =0 ;i<100000;i++){
+            Mapper mapper = new DozerBeanMapper();
 
-        Mapper mapper = new DozerBeanMapper();
+            SourceBean sourceBean = new SourceBean(
+                    19,
+                    "PCtrip",
+                    new ArrayList<String>(Arrays.asList("PVnedor","PShip","PHotel")),
+                    generateDepartmentBean()
+            );
 
-        SourceBean sourceBean = new SourceBean(
-                9,
-                "Ctrip",
-                new ArrayList<String>(Arrays.asList("Vnedor","Ship","Hotel")),
-                generateDepartmentBean()
-        );
-
-        TargetBean targetBean = mapper.map(sourceBean,TargetBean.class);
-        System.out.println(targetBean.getHeadCount());
-        System.out.println(targetBean.getCompanyName());
-        System.out.println(targetBean.getDepartmentName());
-        System.out.println(targetBean.getDepartmentHashMap());
-
+            TargetBean targetBean = mapper.map(sourceBean,TargetBean.class);
+        }
         long endTime = System.currentTimeMillis();
         System.out.println("costTime : "+ (endTime-startTime));
+
+        /**
+         * modelmapper framework
+         * gc 性能
+         */
+//        long startTime = System.currentTimeMillis();
+//        for (int i=0;i<100000;i++){
+//            SourceBean sourceBean1 = new SourceBean(
+//                    9,
+//                    "Ctrip",
+//                    new ArrayList<String>(Arrays.asList("Vnedor","Ship","Hotel")),
+//                    generateDepartmentBean()
+//            );
+//            ModelMapper modelMapper = new ModelMapper();
+//            TargetBean targetBean1 = modelMapper.map(sourceBean1,TargetBean.class);
+//        }
+//        long endTime = System.currentTimeMillis();
+//        System.out.println("threeLayer modelMapper costTime : "+(endTime-startTime));
     }
 
 

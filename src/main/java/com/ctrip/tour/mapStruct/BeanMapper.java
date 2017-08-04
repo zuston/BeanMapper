@@ -46,5 +46,4 @@ public interface BeanMapper {
     // set default value
     @Mapping(target = "calendar", source = "calendar", defaultValue = "null value")
     TargetMS defaultConversion(SourceBMS sourceBMS);
-
 }
