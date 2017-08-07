@@ -29,7 +29,6 @@ public class mapStruct {
             );
             TargetBean targetBean = BeanMapper.BEAN_MAPPER.convert(sourceBean);
         }
-
         long endTime = System.currentTimeMillis();
         System.out.println("costTime : "+ (endTime-startTime));
 

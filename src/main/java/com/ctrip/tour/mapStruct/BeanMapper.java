@@ -6,6 +6,8 @@ import com.ctrip.tour.mapStruct.Bean.SourceAMS;
 import com.ctrip.tour.mapStruct.Bean.SourceBMS;
 import com.ctrip.tour.mapStruct.Bean.SourceMS;
 import com.ctrip.tour.mapStruct.Bean.TargetMS;
+import com.ctrip.tour.mapStruct.BeanV2.ABean;
+import com.ctrip.tour.mapStruct.BeanV2.BBean;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 
@@ -46,4 +48,7 @@ public interface BeanMapper {
     // set default value
     @Mapping(target = "calendar", source = "calendar", defaultValue = "null value")
     TargetMS defaultConversion(SourceBMS sourceBMS);
+
+
+    BBean cc(ABean aBean);
 }
