@@ -19,6 +19,8 @@ import static com.ctrip.tour.dozer.dozer.generateDepartmentBean;
  */
 public class mapStruct {
     public static void main(String[] args) {
+        // 类加载器加载类耗时较大
+        BeanMapper sm = BeanMapper.BEAN_MAPPER;
         long startTime = System.currentTimeMillis();
         for (int i=0;i<100000;i++){
             SourceBean sourceBean = new SourceBean(
@@ -27,7 +29,9 @@ public class mapStruct {
                     new ArrayList<String>(Arrays.asList("Vnedor","Ship","Hotel")),
                     generateDepartmentBean()
             );
-            TargetBean targetBean = BeanMapper.BEAN_MAPPER.convert(sourceBean);
+            TargetBean targetBean = sm.convert(sourceBean);
+//            targetBean.getDepartmentHashMap().get("Vendor").getPersonList().get(0).setPersonAge(100);
+//            System.out.println(sourceBean.getDepartmentHashMap().get("Vendor").getPersonList().get(0).getPersonAge());
         }
         long endTime = System.currentTimeMillis();
         System.out.println("costTime : "+ (endTime-startTime));

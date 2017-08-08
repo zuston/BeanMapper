@@ -21,40 +21,45 @@ import java.util.HashMap;
 public class dozer {
 
     public static void main(String[] args) {
+//        Mapper mapper = new DozerBeanMapper();
+//        long startTime = System.currentTimeMillis();
+//        for (int i =0 ;i<1;i++){
+//
+//            SourceBean sourceBean = new SourceBean(
+//                    19,
+//                    "PCtrip",
+//                    new ArrayList<String>(Arrays.asList("PVnedor","PShip","PHotel")),
+//                    generateDepartmentBean()
+//            );
+//
+//            TargetBean targetBean = mapper.map(sourceBean,TargetBean.class);
+//            // 测试是否深复制
+//            targetBean.getDepartmentHashMap().get("Vendor").getPersonList().get(0).setPersonAge(100);
+//            System.out.println(sourceBean.getDepartmentHashMap().get("Vendor").getPersonList().get(0).getPersonAge());
+//        }
+//        long endTime = System.currentTimeMillis();
+//        System.out.println("costTime : "+ (endTime-startTime));
 
-        long startTime = System.currentTimeMillis();
-        for (int i =0 ;i<100000;i++){
-            Mapper mapper = new DozerBeanMapper();
-
-            SourceBean sourceBean = new SourceBean(
-                    19,
-                    "PCtrip",
-                    new ArrayList<String>(Arrays.asList("PVnedor","PShip","PHotel")),
-                    generateDepartmentBean()
-            );
-
-            TargetBean targetBean = mapper.map(sourceBean,TargetBean.class);
-        }
-        long endTime = System.currentTimeMillis();
-        System.out.println("costTime : "+ (endTime-startTime));
 
         /**
          * modelmapper framework
          * gc 性能
          */
-//        long startTime = System.currentTimeMillis();
-//        for (int i=0;i<100000;i++){
-//            SourceBean sourceBean1 = new SourceBean(
-//                    9,
-//                    "Ctrip",
-//                    new ArrayList<String>(Arrays.asList("Vnedor","Ship","Hotel")),
-//                    generateDepartmentBean()
-//            );
-//            ModelMapper modelMapper = new ModelMapper();
-//            TargetBean targetBean1 = modelMapper.map(sourceBean1,TargetBean.class);
-//        }
-//        long endTime = System.currentTimeMillis();
-//        System.out.println("threeLayer modelMapper costTime : "+(endTime-startTime));
+        ModelMapper modelMapper = new ModelMapper();
+        long startTime = System.currentTimeMillis();
+        for (int i=0;i<1;i++){
+            SourceBean sourceBean1 = new SourceBean(
+                    9,
+                    "Ctrip",
+                    new ArrayList<String>(Arrays.asList("Vnedor","Ship","Hotel")),
+                    generateDepartmentBean()
+            );
+            TargetBean targetBean1 = modelMapper.map(sourceBean1,TargetBean.class);
+            targetBean1.getDepartmentHashMap().get("Vendor").getPersonList().get(0).setPersonAge(100);
+            System.out.println(sourceBean1.getDepartmentHashMap().get("Vendor").getPersonList().get(0).getPersonAge());
+        }
+        long endTime = System.currentTimeMillis();
+        System.out.println("threeLayer modelMapper costTime : "+(endTime-startTime));
     }
 
 

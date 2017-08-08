@@ -2,7 +2,6 @@ package com.ctrip.tour.mapStruct;
 
 import com.ctrip.tour.MapperObject.SourceBean;
 import com.ctrip.tour.MapperObject.TargetBean;
-import com.ctrip.tour.mapStruct.Bean.SourceAMS;
 import com.ctrip.tour.mapStruct.Bean.SourceBMS;
 import com.ctrip.tour.mapStruct.Bean.SourceMS;
 import com.ctrip.tour.mapStruct.Bean.TargetMS;

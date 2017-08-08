@@ -2,6 +2,7 @@ package ctripTest.SecondLayer;
 
 import com.ctrip.tour.MapperObject.PersonBean;
 import com.ctrip.tour.ModelMapper.ModelMapper;
+import com.ctrip.tour.mapStruct.BeanMapper;
 import ctripTest.SecondLayer.MapperInterface.MapStructMapper;
 import ctripTest.SecondLayer.MapperInterface.SelmaMapper;
 import fr.xebia.extras.selma.Selma;
@@ -48,30 +49,30 @@ public class TBean {
 
 
     public static void main(String[] args) {
-//        long startTime = System.currentTimeMillis();
 //        Mapper mapper = new DozerBeanMapper();
+//        long startTime = System.currentTimeMillis();
 //        SBean sBean = generateSBean();
 //        TBean tBean = mapper.map(sBean,TBean.class);
 //        long endTime = System.currentTimeMillis();
 //        System.out.println("twoLayer Dozer costTime : "+(endTime-startTime));
 
+//        MapStructMapper sb = MapStructMapper.MAP_STRUCT_MAPPER;
 //        long startTime = System.currentTimeMillis();
 //        SBean sBean = generateSBean();
-//        TBean tBean = MapStructMapper.MAP_STRUCT_MAPPER.convert(sBean);
+//        TBean tBean = sb.convert(sBean);
 //        long endTime = System.currentTimeMillis();
 //        System.out.println("twoLayer MapStruct costTime : "+(endTime-startTime));
 
+        SelmaMapper selmaMapper = Selma.builder(SelmaMapper.class).build();
+        long startTime = System.currentTimeMillis();
+        SBean sBean = generateSBean();
+        TBean tBean = selmaMapper.convert(sBean);
+        long endTime = System.currentTimeMillis();
+        System.out.println("twoLayer selma costTime : "+(endTime-startTime));
 
-//        long startTime = System.currentTimeMillis();
-//        SBean sBean = generateSBean();
-//        SelmaMapper selmaMapper = Selma.builder(SelmaMapper.class).build();
-//        TBean tBean = selmaMapper.convert(sBean);
-//        long endTime = System.currentTimeMillis();
-//        System.out.println("twoLayer selma costTime : "+(endTime-startTime));
-
-//        long startTime = System.currentTimeMillis();
-//        SBean sBean = generateSBean();
 //        org.modelmapper.ModelMapper modelMapper = new org.modelmapper.ModelMapper();
+//        long startTime = System.currentTimeMillis();
+//        SBean sBean = generateSBean();
 //        TBean tBean = modelMapper.map(sBean,TBean.class);
 //        long endTime = System.currentTimeMillis();
 //        System.out.println("twoLayer modelMapper costTime : "+(endTime-startTime));
@@ -97,16 +98,16 @@ public class TBean {
 //        long endTime = System.currentTimeMillis();
 //        System.out.println("twoLayer HandMapper costTime : "+(endTime-startTime));
 
-        long startTime = System.currentTimeMillis();
-        SBean sBean = generateSBean();
-        MapperFactory mapperFactory = new DefaultMapperFactory.Builder().build();
-        mapperFactory.classMap(com.ctrip.tour.MapperObject.SourceBean.class, com.ctrip.tour.MapperObject.TargetBean.class)
-                .byDefault()
-                .register();
-        MapperFacade mapperFacade = mapperFactory.getMapperFacade();
-        TBean tBean = mapperFacade.map(sBean,TBean.class);
-        long endTime = System.currentTimeMillis();
-        System.out.println("twolayer orika costTime : "+(endTime-startTime));
+//        MapperFactory mapperFactory = new DefaultMapperFactory.Builder().build();
+//        mapperFactory.classMap(com.ctrip.tour.MapperObject.SourceBean.class, com.ctrip.tour.MapperObject.TargetBean.class)
+//                .byDefault()
+//                .register();
+//        MapperFacade mapperFacade = mapperFactory.getMapperFacade();
+//        long startTime = System.currentTimeMillis();
+//        SBean sBean = generateSBean();
+//        TBean tBean = mapperFacade.map(sBean,TBean.class);
+//        long endTime = System.currentTimeMillis();
+//        System.out.println("twolayer orika costTime : "+(endTime-startTime));
 
     }
 

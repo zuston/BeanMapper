@@ -20,8 +20,9 @@ public class orika {
         mapperFactory.classMap(SourceBean.class, TargetBean.class)
                 .byDefault()
                 .register();
+        MapperFacade mapperFacade = mapperFactory.getMapperFacade();
         long startTime = System.currentTimeMillis();
-        for (int i=0;i<100000;i++){
+        for (int i=0;i<1;i++){
             SourceBean sourceBean = new SourceBean(
                     9,
                     "Ctrip",
@@ -29,8 +30,9 @@ public class orika {
                     generateDepartmentBean()
             );
 
-            MapperFacade mapperFacade = mapperFactory.getMapperFacade();
             TargetBean targetBean = mapperFacade.map(sourceBean, TargetBean.class);
+            targetBean.getDepartmentHashMap().get("Vendor").getPersonList().get(0).setPersonAge(100);
+            System.out.println(sourceBean.getDepartmentHashMap().get("Vendor").getPersonList().get(0).getPersonAge());
             targetBean = null;
         }
         long endTime = System.currentTimeMillis();

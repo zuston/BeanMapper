@@ -18,9 +18,11 @@ import static com.ctrip.tour.dozer.dozer.generateDepartmentBean;
  */
 public class selma {
     public static void main(String[] args) {
+        SelmaMapper selmaMapper = Selma.builder(SelmaMapper.class).build();
+
         long startTime = System.currentTimeMillis();
-        for (int i=0;i<100000;i++){
-            SelmaMapper selmaMapper = Selma.builder(SelmaMapper.class).build();
+
+        for (int i=0;i<1;i++){
             SourceBean sourceBean = new SourceBean(
                     9,
                     "Ctrip",
@@ -28,6 +30,8 @@ public class selma {
                     generateDepartmentBean()
             );
             TargetBean targetBean = selmaMapper.convert(sourceBean);
+            targetBean.getDepartmentHashMap().get("Vendor").getPersonList().get(0).setPersonAge(100);
+            System.out.println(sourceBean.getDepartmentHashMap().get("Vendor").getPersonList().get(0).getPersonAge());
         }
 
         long endTime = System.currentTimeMillis();
